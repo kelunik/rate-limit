@@ -9,6 +9,9 @@ maxtrix:
    - php: nightly
   fast_finish: true
 
+services:
+ - redis-server
+
 cache:
   directories:
     - $HOME/.composer/cache
