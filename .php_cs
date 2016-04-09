@@ -1,0 +1,10 @@
+<?php
+
+$finder = Symfony\CS\Finder\DefaultFinder::create()
+     ->in(__DIR__ . "/src")
+     ->in(__DIR__ . "/test");
+
+return Symfony\CS\Config\Config::create()
+    ->level(Symfony\CS\FixerInterface::NONE_LEVEL)
+    ->fixers(["psr2", "-braces", "-psr0"])
+    ->finder($finder);
