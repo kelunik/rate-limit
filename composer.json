@@ -1,7 +1,14 @@
 {
     "name": "kelunik/rate-limit",
-    "description": "Asynchronous rate limiting.",
+    "description": "Asynchronous Rate Limits.",
     "license": "MIT",
+    "keywords": [
+        "amp",
+        "amphp",
+        "limit",
+        "rate-limit",
+        "redis"
+    ],
     "authors": [
         {
             "name": "Niklas Keller",

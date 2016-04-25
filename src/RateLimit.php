@@ -19,7 +19,7 @@ interface RateLimit {
     public function get(string $id): Promise;
 
     /**
-     * Increments the current value and returns the value.
+     * Increments the current value and returns the current value afterwards.
      *
      * @param string $id rate limit key
      * @return Promise
