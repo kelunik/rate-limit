@@ -55,9 +55,9 @@ class Redis implements RateLimit {
 
             if ($ttl < 0) {
                 return $this->ttl;
-            } else {
-                return $ttl;
             }
+
+            return $ttl;
         });
     }
 }
