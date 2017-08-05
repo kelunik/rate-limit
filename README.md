@@ -19,7 +19,7 @@ You're in full control of any actions when the rate limit is exceeded. You can a
 ```php
 $current = yield $this->rateLimit->increment("{$userId}:{$action}");
 
-if ($current > $this->rateLimit) {
+if ($current > $this->limit) {
     // show captcha or error page or do anything you want
 } else {
     // request is within the limit, continue normally
@@ -31,8 +31,8 @@ If you want to expose the limits, e.g. in an HTTP API, you can also request the 
 ```php
 $current = yield $this->rateLimit->increment("{$userId}:{$action}");
 
-$response->setHeader("x-ratelimit-limit", "100");
-$response->setHeader("x-ratelimit-remaining", 100 - $current);
+$response->setHeader("x-ratelimit-limit", $this->limit);
+$response->setHeader("x-ratelimit-remaining", $this->limit - $current);
 $response->setHeader("x-ratelimit-reset", yield $this->rateLimit->ttl("{$userId}:{$action}"));
 ```
 
