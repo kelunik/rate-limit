@@ -1,6 +1,6 @@
 {
     "name": "kelunik/rate-limit",
-    "description": "Asynchronous Rate Limits.",
+    "description": "Rate Limiting for Amp.",
     "license": "MIT",
     "keywords": [
         "amp",

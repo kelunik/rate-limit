@@ -11,3 +11,29 @@
 ```bash
 composer require kelunik/rate-limit
 ```
+
+## Usage
+
+You're in full control of any actions when the rate limit is exceeded. You can also already warn the user before he exceeds the limit.
+
+```php
+$current = yield $this->rateLimit->increment("{$userId}:{$action}");
+
+if ($current > $this->rateLimit) {
+    // show captcha or error page or do anything you want
+} else {
+    // request is within the limit, continue normally
+}
+```
+
+If you want to expose the limits, e.g. in an HTTP API, you can also request the reset time for a given key.
+
+```php
+$current = yield $this->rateLimit->increment("{$userId}:{$action}");
+
+$response->setHeader("x-ratelimit-limit", "100");
+$response->setHeader("x-ratelimit-remaining", $current);
+$response->setHeader("x-ratelimit-reset", yield $this->rateLimit->ttl("{$userId}:{$action}"));
+```
+
+`RateLimit::ttl()` returns the seconds until the limit is reset. If you want to return the absolute time, you can just add `time()` to that value.
