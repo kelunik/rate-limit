@@ -4,14 +4,10 @@
 [![CoverageStatus](https://img.shields.io/coveralls/kelunik/rate-limit/master.svg?style=flat-square)](https://coveralls.io/github/kelunik/rate-limit?branch=master)
 ![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)
 
-`kelunik/rate-limit` is a non-blocking rate limiting library for use with the [`amp`](https://github.com/amphp/amp) concurrency framework.
+`kelunik/rate-limit` is a rate limiting library for [Amp](https://github.com/amphp/amp).
 
-**Required PHP Version**
-
-- PHP 7.0+
-
-**Installation**
+## Installation
 
 ```bash
-$ composer require kelunik/rate-limit
+composer require kelunik/rate-limit
 ```

@@ -2,11 +2,11 @@
 
 namespace Kelunik\RateLimit;
 
-use Amp\Pause;
 use Amp\Redis\Client;
-use function Amp\wait;
+use PHPUnit\Framework\TestCase;
+use function Amp\Promise\wait;
 
-class RedisTest extends \PHPUnit_Framework_TestCase {
+class RedisTest extends TestCase {
     /** @var RateLimit */
     private $rateLimit;
 

@@ -4,8 +4,7 @@ namespace Kelunik\RateLimit;
 
 use Amp\Promise;
 use Amp\Redis\Client;
-use function Amp\pipe;
-use function Amp\resolve;
+use function Amp\call;
 
 /**
  * Redis driver.
@@ -27,30 +26,18 @@ class Redis implements RateLimit {
         $this->ttl = $ttl;
     }
 
-    /**
-     * {@inheritdoc}
-     *
-     * @param string $id rate limit key
-     * @return Promise
-     */
+    /** @inheritdoc */
     public function get(string $id): Promise {
-        $fn = function () use ($id) {
+        return call(function () use ($id) {
             $count = yield $this->redis->get($id);
 
             return (int) $count;
-        };
-
-        return resolve($fn());
+        });
     }
 
-    /**
-     * {@inheritdoc}
-     *
-     * @param string $id rate limit key
-     * @return Promise
-     */
+    /** @inheritdoc */
     public function increment(string $id): Promise {
-        $fn = function () use ($id) {
+        return call(function () use ($id) {
             $count = yield $this->redis->incr($id);
 
             if ($count === 1) {
@@ -58,19 +45,12 @@ class Redis implements RateLimit {
             }
 
             return $count;
-        };
-
-        return resolve($fn());
+        });
     }
 
-    /**
-     * {@inheritdoc}
-     *
-     * @param string $id rate limit key
-     * @return Promise
-     */
+    /** @inheritdoc */
     public function ttl(string $id): Promise {
-        $fn = function () use ($id) {
+        return call(function () use ($id) {
             $ttl = yield $this->redis->ttl($id);
 
             if ($ttl < 0) {
@@ -78,8 +58,6 @@ class Redis implements RateLimit {
             } else {
                 return $ttl;
             }
-        };
-
-        return resolve($fn());
+        });
     }
 }
