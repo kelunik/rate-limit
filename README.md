@@ -32,7 +32,7 @@ If you want to expose the limits, e.g. in an HTTP API, you can also request the 
 $current = yield $this->rateLimit->increment("{$userId}:{$action}");
 
 $response->setHeader("x-ratelimit-limit", "100");
-$response->setHeader("x-ratelimit-remaining", $current);
+$response->setHeader("x-ratelimit-remaining", 100 - $current);
 $response->setHeader("x-ratelimit-reset", yield $this->rateLimit->ttl("{$userId}:{$action}"));
 ```
 
