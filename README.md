@@ -1,7 +1,5 @@
 # rate-limit
 
-[![Build Status](https://img.shields.io/travis/kelunik/rate-limit/master.svg?style=flat-square)](https://travis-ci.org/kelunik/rate-limit)
-[![CoverageStatus](https://img.shields.io/coveralls/kelunik/rate-limit/master.svg?style=flat-square)](https://coveralls.io/github/kelunik/rate-limit?branch=master)
 ![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)
 
 `kelunik/rate-limit` is a rate limiting library for [Amp](https://github.com/amphp/amp).
@@ -17,7 +15,7 @@ composer require kelunik/rate-limit
 You're in full control of any actions when the rate limit is exceeded. You can also already warn the user before he exceeds the limit.
 
 ```php
-$current = yield $this->rateLimit->increment("{$userId}:{$action}");
+$current = $this->rateLimit->increment("{$userId}:{$action}");
 
 if ($current > $this->limit) {
     // show captcha or error page or do anything you want
@@ -29,11 +27,11 @@ if ($current > $this->limit) {
 If you want to expose the limits, e.g. in an HTTP API, you can also request the reset time for a given key.
 
 ```php
-$current = yield $this->rateLimit->increment("{$userId}:{$action}");
+$current = $this->rateLimit->increment("{$userId}:{$action}");
 
 $response->setHeader("x-ratelimit-limit", $this->limit);
 $response->setHeader("x-ratelimit-remaining", $this->limit - $current);
-$response->setHeader("x-ratelimit-reset", yield $this->rateLimit->ttl("{$userId}:{$action}"));
+$response->setHeader("x-ratelimit-reset", $this->rateLimit->getTtl("{$userId}:{$action}"));
 ```
 
-`RateLimit::ttl()` returns the seconds until the limit is reset. If you want to return the absolute time, you can just add `time()` to that value.
+`RateLimit::getTtl()` returns the seconds until the limit is reset. If you want to return the absolute time, you can just add `time()` to that value.
